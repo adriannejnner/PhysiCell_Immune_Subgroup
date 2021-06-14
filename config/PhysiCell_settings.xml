@@ -870,8 +870,6 @@
 		
 			
 				<!-- Viral replication model variables -->
-			<kImp type="double" units="1/min"
-				description="Nuclear import rate">0.1</kImp>
 			<gamnuc type="double" units="1/min"
 				description="RNA synthesis rate">0.0232</gamnuc>
 			<alpha type="double" units="virions"
