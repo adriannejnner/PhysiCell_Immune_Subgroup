@@ -74,10 +74,10 @@
 
 <PhysiCell_settings version="devel-version">
 	<domain>
-		<x_min>-4000</x_min>
-		<x_max>4000</x_max>
-		<y_min>-2500</y_min>
-		<y_max>2500</y_max>
+		<x_min>-1000</x_min>
+		<x_max>1000</x_max>
+		<y_min>-1000</y_min>
+		<y_max>1000</y_max>
 		<z_min>-10</z_min>
 		<z_max>10</z_max>
 		<dx>20</dx>
@@ -113,7 +113,7 @@
 		</full_data>
 		
 		<SVG>
-			<interval units="min">2880</interval><!-- 2880-->
+			<interval units="min">60</interval><!-- 2880-->
 			<enable>true</enable>
 		</SVG>
 		
@@ -179,7 +179,7 @@
 		
 		<variable name="VTEST" units="virions/micron^3" ID="6">
 			<physical_parameter_set>
-				<diffusion_coefficient units="micron^2/min">1</diffusion_coefficient>  <!-- reduce the diffusion -->
+				<diffusion_coefficient units="micron^2/min">5</diffusion_coefficient>  <!-- reduce the diffusion -->
 				<decay_rate units="1/min">0.039</decay_rate>  
 			</physical_parameter_set>
 			<initial_condition units="mol/micron^3">0</initial_condition>
@@ -868,18 +868,36 @@
 			<kFus type="double" units="1/min"
 				description="Fusion rate with endosomes">0.0535</kFus>
 		
-			<uEvirus type="double" units="1/min"
-				description="Fusion rate with endosomes">7.5833e-6</uEvirus>
 			
 				<!-- Viral replication model variables -->
 			<kImp type="double" units="1/min"
 				description="Nuclear import rate">0.1</kImp>
-			<kRel type="double" units="virions/min"
-				description="Virus release rate">6.1667e-5</kRel>
 			<gamnuc type="double" units="1/min"
 				description="RNA synthesis rate">0.0232</gamnuc>
-			<KVnuc type="double" units="virions"
-				description="max virion production">1e4</KVnuc>
+			<alpha type="double" units="virions"
+				description="max virion production">1e4</alpha>
+			<v_rep type="double" units="virions"
+				description="Minimum intracellular virions neccessary for replication">10</v_rep>
+				
+			
+			<!-- Viral binding receptor model variables -->
+			<mhalf type="double" units="virions"
+				description="m_1/2: Binding half-effect constant">10</mhalf>
+			<rhomax type="double" units="virions"
+				description="rho_max: Maximum virus binding">100</rhomax>
+			<uEvirus type="double" units="1/min"
+				description="Fusion rate with endosomes">7.5833e-6</uEvirus>
+			
+			<!-- Virus secretion model parameters -->
+			<kRel type="double" units="virions/min"
+				description="Virus release rate">6.1667e-5</kRel>
+			<tau_rel type="double" units="virions/min"
+				description="Virus release rate">6.1667e-5</tau_rel>
+				
+			<!-- antiviral state parameters -->
+			<tau_IFN type="double" units="virions/min"
+				description="Virus release rate">2880</tau_IFN>
+				
 	</user_parameters>
 	
 </PhysiCell_settings>

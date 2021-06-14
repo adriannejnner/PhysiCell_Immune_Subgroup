@@ -50,20 +50,19 @@ void epithelium_phenotype( Cell* pCell, Phenotype& phenotype, double dt )
 	double Vvoxel = microenvironment.mesh.voxels[1].volume;
 	
 	double IFN_prob = IFN_internal/(IC_50_IFN+IFN_internal);
-	
+		
 	double prob_prob = UniformRandom();
 	if(pCell->custom_data["antiviral_state_timer"]<PhysiCell_globals.current_time && prob_prob>IFN_prob )
 	{
 		//pCell->custom_data["antiviral_state"] = 0;
 	}
-	else if( prob_prob<IFN_prob && pCell->custom_data["antiviral_state"]<1 && pCell->custom_data["Vnuc"]<parameters.doubles("Infection_detection_threshold"))
+	else if( prob_prob<IFN_prob && pCell->custom_data["antiviral_state"]<1)
 	{
 		// cell enters antiviral state
-		//std::cout<<"Cell enters antiviral state "<<prob_prob<<" "<<IFN_prob<<std::endl;
 		pCell->custom_data["antiviral_state"] = 1;
 		
-		// start the counter for the antiviral state - only lasts for 24 hours
-		pCell->custom_data["antiviral_state_timer"] = PhysiCell_globals.current_time+24*60*2;
+		// start the counter for the antiviral state - only lasts for tau_IFN hours
+		pCell->custom_data["antiviral_state_timer"] = PhysiCell_globals.current_time+parameters.doubles("tau_IFN");
 		pCell->phenotype.secretion.secretion_rates[proinflammatory_cytokine_index] = 0;
 		pCell->phenotype.secretion.secretion_rates[chemokine_index] = 0;
 	}
@@ -73,7 +72,6 @@ void epithelium_phenotype( Cell* pCell, Phenotype& phenotype, double dt )
 	{
 		pCell->functions.update_phenotype = NULL; 
 	}
-	
 	
 	return; 
 }
