@@ -54,7 +54,7 @@ void epithelium_phenotype( Cell* pCell, Phenotype& phenotype, double dt )
 	double prob_prob = UniformRandom();
 	if(pCell->custom_data["antiviral_state_timer"]<PhysiCell_globals.current_time && prob_prob>IFN_prob )
 	{
-		//pCell->custom_data["antiviral_state"] = 0;
+		pCell->custom_data["antiviral_state"] = 0;
 	}
 	else if( prob_prob<IFN_prob && pCell->custom_data["antiviral_state"]<1)
 	{
