@@ -59,10 +59,22 @@ void simple_internal_virus_response_model( Cell* pCell, Phenotype& phenotype, do
 	if( pCell->type != lung_epithelial_type )
 	{ return; } 
 	
+			
 	static int vtest_external = microenvironment.find_density_index( "VTEST" ); 	
 	static int chemokine_index = microenvironment.find_density_index( "chemokine" );
 	static int IFN_index = microenvironment.find_density_index( "interferon 1" );
 	static int proinflammatory_cytokine_index = microenvironment.find_density_index( "pro-inflammatory cytokine");
+	
+	if(pCell->custom_data["antiviral_state"]>0.5)
+{		//cell is in antiviral state so should not be producing virus or signalling to immune cells
+		pCell->phenotype.secretion.secretion_rates[proinflammatory_cytokine_index] = 0;
+		pCell->phenotype.secretion.secretion_rates[chemokine_index] = 0;
+		pCell->custom_data["infected_cell_chemokine_secretion_activated"] = 0.5; 
+		pCell->phenotype.secretion.secretion_rates[vtest_external] = 0;
+		pCell->phenotype.molecular.internalized_total_substrates[vtest_external] = 0;
+		pCell->custom_data["Vnuc"] = 0;
+		return;
+	}
 	
 	double Vvoxel = microenvironment.mesh.voxels[1].volume;
 		
@@ -82,13 +94,6 @@ void simple_internal_virus_response_model( Cell* pCell, Phenotype& phenotype, do
 		// (Adrianne) adding pro-inflammatory cytokine secretion by infected cells
 		if(pCell->custom_data["antiviral_state"]<0.5)
 		{
-			/*
-			double rate = Vnuc*Vvoxel;
-			rate /= pCell->custom_data["max_apoptosis_half_max"];
-			if(rate>1.0)
-			{rate = 1;}
-			rate *= pCell->custom_data["infected_cell_chemokine_secretion_rate"];
-			*/
 			pCell->phenotype.secretion.secretion_rates[proinflammatory_cytokine_index] = pCell->custom_data["activated_cytokine_secretion_rate"];
 			pCell->phenotype.secretion.secretion_rates[chemokine_index] = pCell->custom_data["infected_cell_chemokine_secretion_rate"];//rate;
 		}

@@ -20,6 +20,7 @@ void epithelium_phenotype( Cell* pCell, Phenotype& phenotype, double dt )
 	static int debris_index = microenvironment.find_density_index( "debris");
 	static int chemokine_index = microenvironment.find_density_index( "chemokine" );
 	static int proinflammatory_cytokine_index = microenvironment.find_density_index( "pro-inflammatory cytokine");
+	static int vtest_external = microenvironment.find_density_index( "VTEST" ); 
 		
 	// viral dynamics model 
 	internal_viral_dynamics_info.phenotype_function(pCell,phenotype,dt); 
@@ -42,6 +43,7 @@ void epithelium_phenotype( Cell* pCell, Phenotype& phenotype, double dt )
 		// detach all attached cells 
 		// remove_all_adhesions( pCell ); 
 		phenotype.secretion.secretion_rates[debris_index] = pCell->custom_data["debris_secretion_rate"]; 
+		phenotype.secretion.secretion_rates[vtest_external] = 0; 
 	}
 
 	static int IFN_index = microenvironment.find_density_index( "interferon 1" );
@@ -65,12 +67,22 @@ void epithelium_phenotype( Cell* pCell, Phenotype& phenotype, double dt )
 		pCell->custom_data["antiviral_state_timer"] = PhysiCell_globals.current_time+parameters.doubles("tau_IFN");
 		pCell->phenotype.secretion.secretion_rates[proinflammatory_cytokine_index] = 0;
 		pCell->phenotype.secretion.secretion_rates[chemokine_index] = 0;
+		pCell->phenotype.secretion.secretion_rates[vtest_external] = 0;
+		pCell->phenotype.molecular.internalized_total_substrates[vtest_external] = 0;
+		pCell->custom_data["Vnuc"] = 0;	
 	}
 		
 	// if I am dead, don't bother executing this function again 
 	if( phenotype.death.dead == true )
 	{
 		pCell->functions.update_phenotype = NULL; 
+	}
+	
+	if(pCell->custom_data["antiviral_state"]>0.5)
+	{
+		pCell->phenotype.secretion.secretion_rates[vtest_external] = 0;
+		pCell->phenotype.molecular.internalized_total_substrates[vtest_external] = 0;
+		pCell->custom_data["Vnuc"] = 0;	
 	}
 	
 	return; 

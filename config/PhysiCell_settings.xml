@@ -894,14 +894,14 @@
 				
 			<!-- antiviral state parameters -->
 			<tau_IFN type="double" units="virions/min"
-				description="Virus release rate">2880</tau_IFN>
+				description="Virus release rate">14400</tau_IFN>
 				
 				
 			<!-- initialising airways of the lung -->
 			<large_bron type="int" units="microns"
-				description="Virus release rate">150</large_bron>
+				description="Virus release rate">120</large_bron>
 			<small_bron type="int" units="microns"
-				description="Virus release rate">95</small_bron>
+				description="Virus release rate">60</small_bron>
 			<density_virion type="int" units="virions"
 				description="Virus release rate">10</density_virion>
 							

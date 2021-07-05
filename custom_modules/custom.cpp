@@ -181,41 +181,42 @@ void setup_tissue( void )
 	
 	int large_bron = parameters.ints("large_bron");
 	int small_bron = parameters.ints("small_bron");
-	int density_virion = parameters.ints("density_virion");
-	int bronchcentre1_x = 1500;
-	int bronchcentre1_y = 2500;	
-	int bronchcentre2_x = 2500;
-	int bronchcentre2_y = 3500;
-	int bronchcentre3_x = 4000;
-	int bronchcentre3_y = 4000;
-	int bronchcentre4_x = 5500;
-	int bronchcentre4_y = 3000;
-	int bronchcentre5_x = 6500;
-	int bronchcentre5_y = 2200;
-	int bronchcentre6_x = 4422;
-	int bronchcentre6_y = 3811;
-	int bronchcentre7_x = 5953;
-	int bronchcentre7_y = 3439;
-	int bronchcentre8_x = 2298;
-	int bronchcentre8_y = 1588;
-	int bronchcentre9_x = 4869;
-	int bronchcentre9_y = 601;
-	int bronchcentre10_x = 5181;
-	int bronchcentre10_y = 2241;
-	int bronchcentre11_x = 1552;
-	int bronchcentre11_y = 999;
-	int bronchcentre12_x = 3935;
-	int bronchcentre12_y = 2692;
-	int bronchcentre13_x = 909;
-	int bronchcentre13_y = 1963;
-	int bronchcentre14_x = 3185;
-	int bronchcentre14_y = 1215;
-	int bronchcentre15_x = 6671;
-	int bronchcentre15_y = 4276;
-	int bronchcentre16_x = 7318;
-	int bronchcentre16_y = 2992;
-	int bronchcentre17_x = 1845;
-	int bronchcentre17_y = 4067;		
+	int density_virions = parameters.ints("density_virion");
+	
+	int bronchcentre1_x = 1500-4000;
+	int bronchcentre1_y = 2500-2500;	
+	int bronchcentre2_x = 2500-4000;
+	int bronchcentre2_y = 3500-2500;
+	int bronchcentre3_x = 4000-4000;
+	int bronchcentre3_y = 4000-2500;
+	int bronchcentre4_x = 5500-4000;
+	int bronchcentre4_y = 3000-2500;
+	int bronchcentre5_x = 6500-4000;
+	int bronchcentre5_y = 2200-2500;
+	int bronchcentre6_x = 4422-4000;
+	int bronchcentre6_y = 3811-2500;
+	int bronchcentre7_x = 5953-4000;
+	int bronchcentre7_y = 3439-2500;
+	int bronchcentre8_x = 2298-4000;
+	int bronchcentre8_y = 1588-2500;
+	int bronchcentre9_x = 4869-4000;
+	int bronchcentre9_y = 601-2500;
+	int bronchcentre10_x = 5181-4000;
+	int bronchcentre10_y = 2241-2500;
+	int bronchcentre11_x = 1552-4000;
+	int bronchcentre11_y = 999-2500;
+	int bronchcentre12_x = 3935-4000;
+	int bronchcentre12_y = 2692-2500;
+	int bronchcentre13_x = 909-4000;
+	int bronchcentre13_y = 1963-2500;
+	int bronchcentre14_x = 3185-4000;
+	int bronchcentre14_y = 1215-2500;
+	int bronchcentre15_x = 6671-4000;
+	int bronchcentre15_y = 4276-2500;
+	int bronchcentre16_x = 7318-4000;
+	int bronchcentre16_y = 2992-2500;
+	int bronchcentre17_x = 1845-4000;
+	int bronchcentre17_y = 4067-2500;		
 		
 	if( parameters.bools( "initial_condition_large_tissue_bronchiole") == true )
 	{
@@ -230,19 +231,19 @@ void setup_tissue( void )
 				if((x-bronchcentre1_x)*(x-bronchcentre1_x)+(y-bronchcentre1_y)*(y-bronchcentre1_y)>large_bron*large_bron &&
 				(x-bronchcentre2_x)*(x-bronchcentre2_x)+(y-bronchcentre2_y)*(y-bronchcentre2_y)>large_bron*large_bron &&
 				(x-bronchcentre3_x)*(x-bronchcentre3_x)+(y-bronchcentre3_y)*(y-bronchcentre3_y)>large_bron*large_bron &&
-				(x-bronchcentre4_x)*(x-bronchcentre4_x)+(y-bronchcentre4_y)*(y-bronchcentre4_y)>large_bron*large_bron)&&
-				(x-bronchcentre5_x)*(x-bronchcentre5_x)+(y-bronchcentre5_y)*(y-bronchcentre5_y)>large_bron*large_bron)&&
-				(x-bronchcentre6_x)*(x-bronchcentre6_x)+(y-bronchcentre6_y)*(y-bronchcentre6_y)>small_bron*small_bron)&&
-				(x-bronchcentre7_x)*(x-bronchcentre7_x)+(y-bronchcentre7_y)*(y-bronchcentre7_y)>small_bron*small_bron)&&
-				(x-bronchcentre8_x)*(x-bronchcentre8_x)+(y-bronchcentre8_y)*(y-bronchcentre8_y)>small_bron*small_bron)&&
-				(x-bronchcentre9_x)*(x-bronchcentre9_x)+(y-bronchcentre9_y)*(y-bronchcentre9_y)>small_bron*small_bron)&&
-				(x-bronchcentre10_x)*(x-bronchcentre10_x)+(y-bronchcentre10_y)*(y-bronchcentre10_y)>small_bron*small_bron)&&
-				(x-bronchcentre11_x)*(x-bronchcentre11_x)+(y-bronchcentre11_y)*(y-bronchcentre11_y)>small_bron*small_bron)&&
-				(x-bronchcentre12_x)*(x-bronchcentre12_x)+(y-bronchcentre12_y)*(y-bronchcentre12_y)>small_bron*small_bron)&&
-				(x-bronchcentre13_x)*(x-bronchcentre13_x)+(y-bronchcentre13_y)*(y-bronchcentre13_y)>small_bron*small_bron)&&
-				(x-bronchcentre14_x)*(x-bronchcentre14_x)+(y-bronchcentre14_y)*(y-bronchcentre14_y)>small_bron*small_bron)&&
-				(x-bronchcentre15_x)*(x-bronchcentre15_x)+(y-bronchcentre15_y)*(y-bronchcentre15_y)>small_bron*small_bron)&&
-				(x-bronchcentre16_x)*(x-bronchcentre16_x)+(y-bronchcentre16_y)*(y-bronchcentre16_y)>small_bron*small_bron)&&
+				(x-bronchcentre4_x)*(x-bronchcentre4_x)+(y-bronchcentre4_y)*(y-bronchcentre4_y)>large_bron*large_bron&&
+				(x-bronchcentre5_x)*(x-bronchcentre5_x)+(y-bronchcentre5_y)*(y-bronchcentre5_y)>large_bron*large_bron &&
+				(x-bronchcentre6_x)*(x-bronchcentre6_x)+(y-bronchcentre6_y)*(y-bronchcentre6_y)>small_bron*small_bron&&
+				(x-bronchcentre7_x)*(x-bronchcentre7_x)+(y-bronchcentre7_y)*(y-bronchcentre7_y)>small_bron*small_bron&&
+				(x-bronchcentre8_x)*(x-bronchcentre8_x)+(y-bronchcentre8_y)*(y-bronchcentre8_y)>small_bron*small_bron&&
+				(x-bronchcentre9_x)*(x-bronchcentre9_x)+(y-bronchcentre9_y)*(y-bronchcentre9_y)>small_bron*small_bron&&
+				(x-bronchcentre10_x)*(x-bronchcentre10_x)+(y-bronchcentre10_y)*(y-bronchcentre10_y)>small_bron*small_bron&&
+				(x-bronchcentre11_x)*(x-bronchcentre11_x)+(y-bronchcentre11_y)*(y-bronchcentre11_y)>small_bron*small_bron&&
+				(x-bronchcentre12_x)*(x-bronchcentre12_x)+(y-bronchcentre12_y)*(y-bronchcentre12_y)>small_bron*small_bron&&
+				(x-bronchcentre13_x)*(x-bronchcentre13_x)+(y-bronchcentre13_y)*(y-bronchcentre13_y)>small_bron*small_bron&&
+				(x-bronchcentre14_x)*(x-bronchcentre14_x)+(y-bronchcentre14_y)*(y-bronchcentre14_y)>small_bron*small_bron&&
+				(x-bronchcentre15_x)*(x-bronchcentre15_x)+(y-bronchcentre15_y)*(y-bronchcentre15_y)>small_bron*small_bron&&
+				(x-bronchcentre16_x)*(x-bronchcentre16_x)+(y-bronchcentre16_y)*(y-bronchcentre16_y)>small_bron*small_bron&&
 				(x-bronchcentre17_x)*(x-bronchcentre17_x)+(y-bronchcentre17_y)*(y-bronchcentre17_y)>small_bron*small_bron)
 				{
 					pC = create_cell( get_cell_definition("lung epithelium" ) ); 

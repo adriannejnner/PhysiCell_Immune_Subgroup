@@ -3,7 +3,7 @@
 xdim = [0 8000];
 ydim = [0 5000];
 
-broch_rad =  150;
+broch_rad =  235/2;
 broch_cent1 = [1500 2500];
 broch_cent2 = [2500 3500];
 broch_cent3 = [4000 4000];
@@ -12,7 +12,7 @@ broch_cent5 = [6500 2200];
 
 %X = lhsdesign(12,1)*(7500-500)+500;
 %Y = lhsdesign(12,1)*(4500-500)+500;
-broch_rad2 =  95;
+broch_rad2 =  110/2;
 
 X = 1.0e+03*[4.4214,5.9527,2.2982,4.8693,5.1817,1.5516,3.9351,0.9099,3.1854,6.6712,7.3183,1.8453];
 Y = 1.0e+03*[3.8104,3.4388,1.5876,0.6011,2.2410,0.9994,2.6915,1.9629,1.2147,4.2764,2.9921,4.0671];
@@ -29,6 +29,9 @@ broch_cent14 = [X(9),Y(9)];
 broch_cent15 = [X(10),Y(10)];
 broch_cent16 = [X(11),Y(11)];
 broch_cent17 = [X(12),Y(12)];
+broch_cent18 = [X(10),Y(10)];
+broch_cent19 = [X(11),Y(11)];
+broch_cent20 = [X(12),Y(12)];
 
 broch1_x = broch_rad*cos([0:0.1:2*pi])+broch_cent1(1);
 broch1_y = broch_rad*sin([0:0.1:2*pi])+broch_cent1(2);
@@ -91,5 +94,5 @@ set(gca,'FontSize',18)
 xlabel('x dim ({\mu}m)')
 ylabel('y dim ({\mu}m)')
 
-(pi*broch_rad^2*5+pi*(broch_rad2)^2*12)/(8000*5000)
+(pi*broch_rad^2*5+pi*(broch_rad2)^2*15)/(8000*5000)
 
