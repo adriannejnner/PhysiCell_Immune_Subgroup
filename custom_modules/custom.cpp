@@ -184,8 +184,8 @@ void setup_tissue( void )
 	
 	int large_bron = parameters.ints("large_bron");
 	int small_bron = parameters.ints("small_bron");
-	int density_virions = parameters.ints("density_virion");
-	
+	double density_virions = parameters.doubles("density_virion");
+		
 	int bronchcentre1_x = 1500-4000;
 	int bronchcentre1_y = 2500-2500;	
 	int bronchcentre2_x = 2500-4000;
@@ -309,6 +309,7 @@ void setup_tissue( void )
 		}
 	}
 	
+
 	
 	if( parameters.bools( "initial_condition_large_tissue_bronchiole") == true )
 	{
@@ -320,58 +321,44 @@ void setup_tissue( void )
 			std::vector<double> Vectpos = microenvironment.mesh.voxels[n].center;
 			
 			if((Vectpos[0]-bronchcentre1_x)*(Vectpos[0]-bronchcentre1_x)+(Vectpos[1]-bronchcentre1_y)*(Vectpos[1]-bronchcentre1_y)<large_bron*large_bron)//in bronchiole 1
-			{microenvironment(n)[vtest_external] += single_virion_density_change*density_virions;}
+			{microenvironment(n)[vtest_external] += density_virions;}
 			else if((Vectpos[0]-bronchcentre2_x)*(Vectpos[0]-bronchcentre2_x)+(Vectpos[1]-bronchcentre2_y)*(Vectpos[1]-bronchcentre2_y)<large_bron*large_bron)//in bronchiole 2
-			{microenvironment(n)[vtest_external] += single_virion_density_change*density_virions;}
+			{microenvironment(n)[vtest_external] += density_virions;}
 			else if((Vectpos[0]-bronchcentre3_x)*(Vectpos[0]-bronchcentre3_x)+(Vectpos[1]-bronchcentre3_y)*(Vectpos[1]-bronchcentre3_y)<large_bron*large_bron)//in bronchiole 3
-			{microenvironment(n)[vtest_external] += single_virion_density_change*density_virions;}
+			{microenvironment(n)[vtest_external] += density_virions;}
 			else if((Vectpos[0]-bronchcentre4_x)*(Vectpos[0]-bronchcentre4_x)+(Vectpos[1]-bronchcentre4_y)*(Vectpos[1]-bronchcentre4_y)<large_bron*large_bron)//in bronchiole 4
-			{microenvironment(n)[vtest_external] += single_virion_density_change*density_virions;}
+			{microenvironment(n)[vtest_external] += density_virions;}
 			else if((Vectpos[0]-bronchcentre5_x)*(Vectpos[0]-bronchcentre5_x)+(Vectpos[1]-bronchcentre5_y)*(Vectpos[1]-bronchcentre5_y)<large_bron*large_bron)//in bronchiole 5
-			{microenvironment(n)[vtest_external] += single_virion_density_change*density_virions;}
+			{microenvironment(n)[vtest_external] += density_virions;}
 			else if((Vectpos[0]-bronchcentre6_x)*(Vectpos[0]-bronchcentre6_x)+(Vectpos[1]-bronchcentre6_y)*(Vectpos[1]-bronchcentre6_y)<small_bron*small_bron)//in bronchiole 6
-			{microenvironment(n)[vtest_external] += single_virion_density_change*density_virions;}
+			{microenvironment(n)[vtest_external] += density_virions;}
 			else if((Vectpos[0]-bronchcentre7_x)*(Vectpos[0]-bronchcentre7_x)+(Vectpos[1]-bronchcentre7_y)*(Vectpos[1]-bronchcentre7_y)<small_bron*small_bron)//in bronchiole 7
-			{microenvironment(n)[vtest_external] += single_virion_density_change*density_virions;}
+			{microenvironment(n)[vtest_external] += density_virions;}
 			else if((Vectpos[0]-bronchcentre8_x)*(Vectpos[0]-bronchcentre8_x)+(Vectpos[1]-bronchcentre8_y)*(Vectpos[1]-bronchcentre8_y)<small_bron*small_bron)//in bronchiole 8
-			{microenvironment(n)[vtest_external] += single_virion_density_change*density_virions;}
+			{microenvironment(n)[vtest_external] += density_virions;}
 			else if((Vectpos[0]-bronchcentre9_x)*(Vectpos[0]-bronchcentre9_x)+(Vectpos[1]-bronchcentre9_y)*(Vectpos[1]-bronchcentre9_y)<small_bron*small_bron)//in bronchiole 9
-			{microenvironment(n)[vtest_external] += single_virion_density_change*density_virions;}
+			{microenvironment(n)[vtest_external] += density_virions;}
 			else if((Vectpos[0]-bronchcentre10_x)*(Vectpos[0]-bronchcentre10_x)+(Vectpos[1]-bronchcentre10_y)*(Vectpos[1]-bronchcentre10_y)<small_bron*small_bron)//in bronchiole 10
-			{microenvironment(n)[vtest_external] += single_virion_density_change*density_virions;}
+			{microenvironment(n)[vtest_external] += density_virions;}
 			else if((Vectpos[0]-bronchcentre11_x)*(Vectpos[0]-bronchcentre11_x)+(Vectpos[1]-bronchcentre11_y)*(Vectpos[1]-bronchcentre11_y)<small_bron*small_bron)//in bronchiole 11
-			{microenvironment(n)[vtest_external] += single_virion_density_change*density_virions;}
+			{microenvironment(n)[vtest_external] += density_virions;}
 			else if((Vectpos[0]-bronchcentre12_x)*(Vectpos[0]-bronchcentre12_x)+(Vectpos[1]-bronchcentre12_y)*(Vectpos[1]-bronchcentre12_y)<small_bron*small_bron)//in bronchiole 12
-			{microenvironment(n)[vtest_external] += single_virion_density_change*density_virions;}
+			{microenvironment(n)[vtest_external] += density_virions;}
 			else if((Vectpos[0]-bronchcentre13_x)*(Vectpos[0]-bronchcentre13_x)+(Vectpos[1]-bronchcentre13_y)*(Vectpos[1]-bronchcentre13_y)<small_bron*small_bron)//in bronchiole 13
-			{microenvironment(n)[vtest_external] += single_virion_density_change*density_virions;}
+			{microenvironment(n)[vtest_external] += density_virions;}
 			else if((Vectpos[0]-bronchcentre14_x)*(Vectpos[0]-bronchcentre14_x)+(Vectpos[1]-bronchcentre14_y)*(Vectpos[1]-bronchcentre14_y)<small_bron*small_bron)//in bronchiole 14
-			{microenvironment(n)[vtest_external] += single_virion_density_change*density_virions;}
+			{microenvironment(n)[vtest_external] += density_virions;}
 			else if((Vectpos[0]-bronchcentre15_x)*(Vectpos[0]-bronchcentre15_x)+(Vectpos[1]-bronchcentre15_y)*(Vectpos[1]-bronchcentre15_y)<small_bron*small_bron)//in bronchiole 15
-			{microenvironment(n)[vtest_external] += single_virion_density_change*density_virions;}
+			{microenvironment(n)[vtest_external] += density_virions;}
 			else if((Vectpos[0]-bronchcentre16_x)*(Vectpos[0]-bronchcentre16_x)+(Vectpos[1]-bronchcentre16_y)*(Vectpos[1]-bronchcentre16_y)<small_bron*small_bron)//in bronchiole 16
-			{microenvironment(n)[vtest_external] += single_virion_density_change*density_virions;}
+			{microenvironment(n)[vtest_external] += density_virions;}
 			else if((Vectpos[0]-bronchcentre17_x)*(Vectpos[0]-bronchcentre17_x)+(Vectpos[1]-bronchcentre17_y)*(Vectpos[1]-bronchcentre17_y)<small_bron*small_bron)//in bronchiole 17
-			{microenvironment(n)[vtest_external] += single_virion_density_change*density_virions;}
+			{microenvironment(n)[vtest_external] += density_virions;}
 			
 		}
 		
 	}
-	else
-	{		std::cout << "Placing " << number_of_virions << " virions ... " << std::endl; 
-
-		for( int n=0 ; n < number_of_virions ; n++ )
-		{
-			// pick a random voxel 
-			std::vector<double> position = {0,0,0}; 
-			position[0] = x_min + (x_max-x_min)*UniformRandom(); 
-			position[1] = y_min + (y_max-y_min)*UniformRandom(); 
-			
-			int m = microenvironment.nearest_voxel_index( position ); 
-			microenvironment(m)[nV] += single_virion_density_change; 
-		}
-	}
-	
+		
 	// now place immune cells 
 	
 	initial_immune_cell_placement();

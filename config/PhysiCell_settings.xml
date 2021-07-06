@@ -627,7 +627,7 @@
 			<phenotype>
 				<death>
 					<model code="100" name="apoptosis"> 
-						<death_rate units="1/min">2.407e-4</death_rate>  
+						<death_rate units="1/min">0</death_rate>  
 					</model> 
 				</death>
 				
@@ -735,6 +735,14 @@
 				description="initial number of CD4 Tcells in tissue">0</number_of_CD4_Tcells> 
 			<perecentage_tissue_vascularized type="double" units="percentage" 
 				description="percentage of tissue sitting above blood vessels">8.8</perecentage_tissue_vascularized>	
+				
+			<!-- initialising airways of the lung -->
+			<large_bron type="int" units="microns"
+				description="Virus release rate">120</large_bron>
+			<small_bron type="int" units="microns"
+				description="Virus release rate">60</small_bron>
+			<density_virion type="double" units="virions"
+				description="Virus release rate">0.00125</density_virion><!-- 0.00125-->
 			
 			<!-- cell colouring --> 
 			<color_variable type="string" description="color cells based on this variable">Vnuc</color_variable>
@@ -777,11 +785,13 @@
 			<macrophage_recruitment_saturation_signal type="double" units="substrate/micron^3"
 				description="RsatM: saturating concentration to attract macrophages">0.3</macrophage_recruitment_saturation_signal> <!-- 0.3 debug -->
 			<neutrophil_max_recruitment_rate type="double" units="cells/min/micron^3"
-				description="rNrecuit: max neutrophil recruitment rate (for saturated signal)">1.5e-8</neutrophil_max_recruitment_rate> <!-- 4e-9 debug -->
+				description="rNrecuit: max neutrophil recruitment rate (for saturated signal)">1e-9</neutrophil_max_recruitment_rate> <!-- 4e-9 debug -->
 			<neutrophil_recruitment_min_signal type="double" units="substrate/micron^3"
 				description="RminN: min concentration to attract neutrophils">0.05</neutrophil_recruitment_min_signal> <!--0.1 debug -->
 			<neutrophil_recruitment_saturation_signal type="double" units="substrate/micron^3"
 				description="RsatN: saturating concentration to attract neutrophils">0.1</neutrophil_recruitment_saturation_signal> <!-- 0.3 debug -->
+			<death_rateDCs type="double" units="1/min"
+				description="Death rate of DCs">2.407e-4</death_rateDCs>
 					
 			<!-- virus parameters --> 
 			<virus_fraction_released_at_death type="double" units="none" 
@@ -875,13 +885,6 @@
 			<tau_IFN type="double" units="virions/min"
 				description="Virus release rate">14400</tau_IFN>
 				
-			<!-- initialising airways of the lung -->
-			<large_bron type="int" units="microns"
-				description="Virus release rate">120</large_bron>
-			<small_bron type="int" units="microns"
-				description="Virus release rate">60</small_bron>
-			<density_virion type="int" units="virions"
-				description="Virus release rate">10</density_virion>
 							
 	</user_parameters>
 	

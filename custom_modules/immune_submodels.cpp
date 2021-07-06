@@ -992,6 +992,7 @@ void DC_phenotype( Cell* pCell, Phenotype& phenotype, double dt )
 	//std::cout<<"DC phenotype"<<std::endl;
 	// (Adrianne) get type of CD8+ T cell
 	static int CD8_Tcell_type = get_cell_definition( "CD8 Tcell" ).type;
+	static int apoptosis_index = phenotype.death.find_death_model_index( "apoptosis" ); 
 	
 	// (Adrianne) if DC is already activated, then check whether it leaves the tissue
 	if( pCell->custom_data["activated_immune_cell"] >  0.5 && UniformRandom() < 0.002)
@@ -1046,21 +1047,21 @@ void DC_phenotype( Cell* pCell, Phenotype& phenotype, double dt )
 		
 		return;
 	}
-	else 
+	else // not an activated DC
 	{
 		
 		// (adrianne) DCs become activated if there is an infected cell in their neighbour with greater 1 viral protein or if the local amount of virus is greater than 10
 		static int nV_external = microenvironment.find_density_index("virion");
 		
 	
-	double Vvoxel = microenvironment.mesh.voxels[1].volume;	
-	static int vtest_external = microenvironment.find_density_index( "VTEST" ); 
+		double Vvoxel = microenvironment.mesh.voxels[1].volume;	
+		static int vtest_external = microenvironment.find_density_index( "VTEST" ); 
 		 
 		double virus_amount = pCell->nearest_density_vector()[vtest_external];
 		if( virus_amount*microenvironment.mesh.voxels[1].volume > parameters.doubles("virions_needed_for_DC_activation")) // (Adrianne) amount of virus in local voxel with DC is greater than 10
-		{
-			
+		{			
 			pCell->custom_data["activated_immune_cell"] = 1.0; // (Adrianne) DC becomes activated
+			pCell->phenotype.death.rates[apoptosis_index] = parameters.doubles("death_rateDCs");
 		}
 		else //(Adrianne) check for infected cells nearby
 		{	
@@ -1074,9 +1075,9 @@ void DC_phenotype( Cell* pCell, Phenotype& phenotype, double dt )
 				if( pTestCell != pCell && pTestCell->phenotype.death.dead == false && pTestCell->custom_data["Vnuc"]>parameters.doubles("infection_detection_threshold")/Vvoxel )
 				{			
 					pCell->custom_data["activated_immune_cell"] = 1.0; 
+					pCell->phenotype.death.rates[apoptosis_index] = parameters.doubles("death_rateDCs");
 					
-					n = neighbors.size();
-					
+					n = neighbors.size();					
 				}
 				
 				n++; 
