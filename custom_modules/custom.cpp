@@ -89,6 +89,7 @@ void create_cell_types( void )
 	cell_defaults.functions.calculate_distance_to_membrane = NULL; 
 	
 	int virion_index = microenvironment.find_density_index( "virion" ); 
+	int VTEST_index = microenvironment.find_density_index( "VTEST" ); 
 	
 	/*
 	   This parses the cell definitions in the XML config file. 
@@ -107,6 +108,8 @@ void create_cell_types( void )
 	
 	Cell_Definition* pCD = find_cell_definition( "lung epithelium" ); 
 	pCD->phenotype.molecular.fraction_released_at_death[virion_index] = 
+		parameters.doubles("virus_fraction_released_at_death"); 
+	pCD->phenotype.molecular.fraction_released_at_death[VTEST_index] = 
 		parameters.doubles("virus_fraction_released_at_death"); 
 
 	immune_submodels_setup();
@@ -305,90 +308,9 @@ void setup_tissue( void )
 			}
 		}
 	}
-	int number_of_virions = (int) ( parameters.doubles("multiplicity_of_infection") * 
-		(*all_cells).size() ); 
-	double single_virion_density_change = 1.0 / microenvironment.mesh.dV; 
-	// infect the cell closest to the center  
-
-	if( parameters.bools( "use_single_infected_cell" ) == true )
-	{
-		std::cout << "Infecting center cell with one virion ... " << std::endl; 
-		
-		double Vvoxel = microenvironment.mesh.voxels[1].volume;
-		//pNearestCell->phenotype.molecular.internalized_total_substrates[ nV ] = 1.0/Vvoxel; 
-		pNearestCell->custom_data["Vnuc"]=11;
-	}
-	else if( parameters.bools( "initial_condition_small_tissue") == true )
-	{
-		std::vector<double> position = {0,0,0};
-		int m = microenvironment.nearest_voxel_index( position ); 
-		microenvironment(m)[vtest_external] += single_virion_density_change*2;//*50;
-		position[0] = 100;
-		m = microenvironment.nearest_voxel_index( position ); 
-		microenvironment(m)[vtest_external] += single_virion_density_change*2;
-		position[0] = -50;
-		m = microenvironment.nearest_voxel_index( position ); 
-		microenvironment(m)[vtest_external] += single_virion_density_change*2;
-		position[0] = -150;
-		m = microenvironment.nearest_voxel_index( position ); 
-		microenvironment(m)[vtest_external] += single_virion_density_change*2;
-	}
-	else if( parameters.bools( "initial_condition_large_tissue") == true )
-	{
-		std::vector<double> position = {0,0,0};
-		position[0] = -4000+1600;
-		int m = microenvironment.nearest_voxel_index( position ); 
-		microenvironment(m)[vtest_external] += single_virion_density_change*2;
-		position[0] = -4000+1600+1;
-		m = microenvironment.nearest_voxel_index( position ); 
-		microenvironment(m)[vtest_external] += single_virion_density_change*2;
-		position[0] = -4000+1600-1;
-		m = microenvironment.nearest_voxel_index( position ); 
-		microenvironment(m)[vtest_external] += single_virion_density_change*2;
-		position[0] = -4000+1600+2;
-		m = microenvironment.nearest_voxel_index( position ); 
-		microenvironment(m)[vtest_external] += single_virion_density_change*2;
-		
-		position[0] = -4000+2*1600;
-		m = microenvironment.nearest_voxel_index( position ); 
-		microenvironment(m)[vtest_external] += single_virion_density_change*4;
-		position[0] = -4000+2*1600-1;
-		m = microenvironment.nearest_voxel_index( position ); 
-		microenvironment(m)[vtest_external] += single_virion_density_change*4;
-		position[0] = -4000+2*1600+1;
-		m = microenvironment.nearest_voxel_index( position ); 
-		microenvironment(m)[vtest_external] += single_virion_density_change*4;
-		position[0] = -4000+2*1600-2;
-		m = microenvironment.nearest_voxel_index( position ); 
-		microenvironment(m)[vtest_external] += single_virion_density_change*4;
-		
-		position[0] = -4000+3*1600;
-		m = microenvironment.nearest_voxel_index( position ); 
-		microenvironment(m)[vtest_external] += single_virion_density_change*2;
-		position[0] = -4000+3*1600-1;
-		m = microenvironment.nearest_voxel_index( position ); 
-		microenvironment(m)[vtest_external] += single_virion_density_change*2;
-		position[0] = -4000+3*1600+2;
-		m = microenvironment.nearest_voxel_index( position ); 
-		microenvironment(m)[vtest_external] += single_virion_density_change*2;
-		position[0] = -4000+3*1600+1;
-		m = microenvironment.nearest_voxel_index( position ); 
-		microenvironment(m)[vtest_external] += single_virion_density_change*2;
-		
-		position[0] =-4000+4*1600;
-		m = microenvironment.nearest_voxel_index( position ); 
-		microenvironment(m)[vtest_external] += single_virion_density_change*5;
-		position[0] =-4000+4*1600+1;
-		m = microenvironment.nearest_voxel_index( position ); 
-		microenvironment(m)[vtest_external] += single_virion_density_change*5;
-		position[0] =-4000+4*1600-1;
-		m = microenvironment.nearest_voxel_index( position ); 
-		microenvironment(m)[vtest_external] += single_virion_density_change*5;
-		position[0] =-4000+4*1600+2;
-		m = microenvironment.nearest_voxel_index( position ); 
-		microenvironment(m)[vtest_external] += single_virion_density_change*5;
-	}
-	else if( parameters.bools( "initial_condition_large_tissue_bronchiole") == true )
+	
+	
+	if( parameters.bools( "initial_condition_large_tissue_bronchiole") == true )
 	{
 				
 		std::vector<double> position = {0,0,0};

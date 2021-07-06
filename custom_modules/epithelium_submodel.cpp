@@ -54,6 +54,32 @@ void epithelium_phenotype( Cell* pCell, Phenotype& phenotype, double dt )
 	double IFN_prob = IFN_internal/(IC_50_IFN+IFN_internal);
 		
 	double prob_prob = UniformRandom();
+	
+	if(prob_prob<IFN_prob) // if stimulation is sufficient cell is antiviral
+	{
+		// cell enters antiviral state
+		pCell->custom_data["antiviral_state"] = 1;
+		
+		pCell->phenotype.secretion.secretion_rates[proinflammatory_cytokine_index] = 0;
+		pCell->phenotype.secretion.secretion_rates[chemokine_index] = 0;
+		pCell->phenotype.secretion.secretion_rates[vtest_external] = 0;
+		pCell->phenotype.molecular.internalized_total_substrates[vtest_external] = 0;
+		pCell->custom_data["Vnuc"] = 0;	
+		
+		if( pCell->custom_data["antiviral_state_timer"]<PhysiCell_globals.current_time )// antiviral state timer has expired or hasn't started 
+		{
+			pCell->custom_data["antiviral_state_timer"] = PhysiCell_globals.current_time+parameters.doubles("tau_IFN");
+		}// else it hasn't finished it's antiviral state timer
+	}
+	else //antiviral stimulation wasn't sufficient
+	{
+		//check if antiviral state time has expired or if it's not in an antiviral state
+		if( pCell->custom_data["antiviral_state_timer"]<PhysiCell_globals.current_time )// it's not meant to stay in antiviral state
+		{			
+			pCell->custom_data["antiviral_state"] = 0;
+		}
+	}
+	/*
 	if(pCell->custom_data["antiviral_state_timer"]<PhysiCell_globals.current_time && prob_prob>IFN_prob )
 	{
 		pCell->custom_data["antiviral_state"] = 0;
@@ -70,13 +96,14 @@ void epithelium_phenotype( Cell* pCell, Phenotype& phenotype, double dt )
 		pCell->phenotype.secretion.secretion_rates[vtest_external] = 0;
 		pCell->phenotype.molecular.internalized_total_substrates[vtest_external] = 0;
 		pCell->custom_data["Vnuc"] = 0;	
-	}
+	}*/
 		
 	// if I am dead, don't bother executing this function again 
 	if( phenotype.death.dead == true )
 	{
 		pCell->functions.update_phenotype = NULL; 
 	}
+	
 	
 	if(pCell->custom_data["antiviral_state"]>0.5)
 	{

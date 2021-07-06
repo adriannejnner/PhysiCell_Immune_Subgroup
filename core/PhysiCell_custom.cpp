@@ -66,6 +66,7 @@
 */
 
 #include "./PhysiCell_custom.h" 
+#include "./PhysiCell_cell.h" 
 #include <vector>
 #include <cstdio>
 #include <iostream>
@@ -229,6 +230,14 @@ double& Custom_Cell_Data::operator[](int i)
 
 double& Custom_Cell_Data::operator[]( std::string name )
 {
+	#ifdef DEBUG_CUSTOM_VAR
+	extern Cell_Definition cell_defaults;
+		if (cell_defaults.custom_data.find_variable_index(name) <0 )
+		{
+			std::cout<<__FILE__<< ":" << __FUNCTION__ << ": ERROR - invalide custom variable: " << name << std::endl;
+			std:exit(-1);
+		}
+	#endif 
 	return variables[ name_to_index_map[name] ].value; 
 }
 

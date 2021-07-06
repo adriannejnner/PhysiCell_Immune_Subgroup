@@ -451,7 +451,7 @@ void CD8_Tcell_phenotype( Cell* pCell, Phenotype& phenotype, double dt )
 		//print death rate
 		//std::cout<<"CD8 Death rate before: " <<pCell->phenotype.death.rates[apoptosis_index]<<std::endl;
 		pCell->phenotype.death.rates[apoptosis_index] = parameters.doubles("Death_rates_of_old_Tcells");
-		pCell->phenotype.death.rates[apoptosis_index] = 100; // new death rate of T cells when they have exceeded generation
+		//pCell->phenotype.death.rates[apoptosis_index] = 100; // new death rate of T cells when they have exceeded generation
 		//std::cout<<"CD8 Death rate after change:  " <<pCell->phenotype.death.rates[apoptosis_index]<<std::endl;
 		// turn proliferate rate off
 	    //(to do this, access the index for the flow cytometry proliferation model, like the apoptosis model, and change the transition rate)

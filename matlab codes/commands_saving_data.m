@@ -1,4 +1,4 @@
-timetotal = 225;%273;
+timetotal = 50;%273;
 A = 'output0000000';
 A2 = 'output000000';
 A3 = 'output00000';
